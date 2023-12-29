@@ -1,32 +1,45 @@
-import React from 'react'
-import { Button, List } from 'semantic-ui-react'
+import React ,{useState}from 'react'
+import {  Container, Menu } from 'semantic-ui-react'
+import { NavLink } from "react-router-dom";
+import CartSummary from './CartSummary'
+import SignedOut from './SignedOut'
+import SignedIn from './SignedIn.jsx'
+import { useNavigate } from "react-router-dom";
 
 export default function Navi() {
-  return (
-    <div>
-        <Button>Click Here</Button>
-        <List>
-    <List.Item>
-      <List.Icon name='users' />
-      <List.Content>Semantic UI</List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Icon name='marker' />
-      <List.Content>New York, NY</List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Icon name='mail' />
-      <List.Content>
-        <a href='mailto:jack@semantic-ui.com'>jack@semantic-ui.com</a>
-      </List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Icon name='linkify' />
-      <List.Content>
-        <a href='http://www.semantic-ui.com'>semantic-ui.com</a>
-      </List.Content>
-    </List.Item>
-  </List>
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
+    let navigate  = useNavigate();
+    function handleSignOut() {
+        setIsAuthenticated(false)
+        navigate("/")
+    }
+
+    function handleSignIn() {
+        setIsAuthenticated(true)
+    }
+    return (
+        <div>
+            <Menu inverted fixed='top'>
+                <Container>
+                    <Menu.Item
+                        name='home'
+                        as={NavLink} 
+                        to="/"
+                    />
+                    <Menu.Item
+                        name='messages'
+                    />
+
+                    <Menu.Menu position='right'>
+                        <CartSummary/>
+                        {
+                            isAuthenticated?
+                            <SignedIn signOut={handleSignOut}/>
+                            :<SignedOut signIn={handleSignIn}/>
+                        }                                               
+                    </Menu.Menu>
+                </Container>
+            </Menu>
         </div>
-  )
+    )
 }

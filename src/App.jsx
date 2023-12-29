@@ -1,47 +1,18 @@
- import React from 'react'
-// import Todos from './pages/Todos'
-// import Users from './pages/Users'
+ import { Container } from 'semantic-ui-react';
+ import './App.css';
+ import Dashboard from './layouts/Dashboard';
+ import Navi from './layouts/Navi';
+ import 'semantic-ui-css/semantic.min.css'
 
-// export default function App() {
-//   return (
-//     <div>
-//       <Todos/>
-//       <Users/>
-//     </div>
-//   )
-// }
+export default function App() {
+  return (
+    <div className="App">
+    <Navi />
+    <Container className='main'>
+      <Dashboard />
 
-export class Customer
-{
-    constructor(id,customerNumber)
-    {
-        this.id = id;
-        this.customerNumber = customerNumber;
-    }
+    </Container>
+  </div>
+  )
 }
 
-let customer = new Customer(1,"12345");
-//prototyping  
-customer.name = "Süheyla Akgün"
-console.log(customer.name);
-Customer.bisey = "bişey";
-console.log(Customer.bisey);
-console.log(customer.customerNumber);
-
-class IndividualCustomer extends Customer
-{
-    constructor(firstName, id,customerNumber)
-    {
-        super(id, customerNumber);
-        this.firstName = firstName;
-    }
-}
-
-class CorporateCustomer extends Customer
-{
-    constructor(companyName, id,customerNumber)
-    {
-      super(id, customerNumber)
-      this.companyName = companyName;
-    }
-}
